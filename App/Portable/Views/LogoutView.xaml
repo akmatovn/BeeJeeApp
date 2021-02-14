@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App.Portable.Views.LogoutView"
+             Title="New Item"
+             xmlns:behaviour="clr-namespace:App.Portable.Helpers.Behaviors"
+             xmlns:converter="clr-namespace:App.Portable.Helpers.Converters;assembly=App.Portable">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Spacing="3" Padding="15">
+
+            
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancel" Clicked="Cancel_Completed" HorizontalOptions="FillAndExpand"></Button>
+                <!--<Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>-->
+                <Button Text="Login" Clicked="LogoutClick" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

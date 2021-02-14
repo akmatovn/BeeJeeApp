@@ -1,0 +1,2 @@
+Values/Strings.xml;values/strings.xml
+Layout/radextendedlistview_scrollbars.xml;layout/radextendedlistview_scrollbars.xml

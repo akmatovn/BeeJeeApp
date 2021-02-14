@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App.Portable.Views.LoginView"
+             Title="New Item"
+             xmlns:behaviour="clr-namespace:App.Portable.Helpers.Behaviors"
+             xmlns:converter="clr-namespace:App.Portable.Helpers.Converters;assembly=App.Portable">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Spacing="3" Padding="15">
+
+            <!--UserName-->
+            <!--<Label Text="UserName" FontSize="Medium" />-->
+            <Entry x:Name="UserNameTextBlock" 
+                   FontSize="Medium" 
+                   Text="{Binding UserName.Value}" 
+                   Placeholder="User Name">
+                <Entry.Behaviors>
+                    <behaviour:EntryLineValidationBehaviour IsValid="{Binding UserName.IsValid}"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Label Text="{Binding UserName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                   IsVisible="{Binding UserName.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                   Style="{StaticResource ErrorTextStyle}"/>
+            <!--/UserName-->
+
+            <!--Password-->
+            <Entry x:Name="PasswordTextBlock" 
+                   FontSize="Medium"
+                   Text="{Binding Password.Item1.Value}"
+                   Placeholder="Password">
+                <Entry.Behaviors>
+                    <behaviour:EntryLineValidationBehaviour IsValid="{Binding Password.Item1.IsValid}"/>
+                </Entry.Behaviors>
+            </Entry>
+
+            <Label Text="{Binding Password.Item1.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                   IsVisible="{Binding Password.Item1.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                   Style="{StaticResource ErrorTextStyle}"/>
+
+            <!--<Entry Text="{Binding Password.Item2.Value}"
+                   Placeholder="Confirm Password">
+                <Entry.Behaviors>
+                    <behaviour:EntryLineValidationBehaviour IsValid="{Binding Password.Item2.IsValid}"/>
+                </Entry.Behaviors>
+            </Entry>
+
+            <Label Text="{Binding Password.Item2.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                   IsVisible="{Binding Password.Item2.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                   Style="{StaticResource ErrorTextStyle}"/>-->
+            <!--/Password-->
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancel" Clicked="Cancel_Completed" HorizontalOptions="FillAndExpand"></Button>
+                <!--<Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>-->
+                <Button Text="Login" Clicked="LoginClick" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerikDataGrid="clr-namespace:Telerik.XamarinForms.DataGrid;assembly=Telerik.XamarinForms.DataGrid"
+             xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
+             xmlns:views="clr-namespace:App.Portable.Views"
+             xmlns:local="clr-namespace:App.Portable"
+             x:Class="App.Portable.Views.TaskView">
+
+    <VisualElement.Resources>
+        <local:Resources />
+    </VisualElement.Resources>
+
+    <Grid Margin="16, 1, 16, 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="5*"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackLayout HorizontalOptions="End" Orientation="Horizontal" Spacing="0">
+            <telerikInput:RadButton x:Name="addButton"
+                                    Text="&#xe813;"
+                                    Clicked="AddItem"
+                                    Style="{StaticResource CrudButtonStyle1}" />
+            <telerikInput:RadButton x:Name="editButton"
+                                    Text="&#xe818;"
+                                    Command="{Binding GoToEditItemCommand}"
+                                    Style="{StaticResource CrudButtonStyle1}" />
+        </StackLayout>
+        <telerikDataGrid:RadDataGrid x:Name="TaskItemsControl"
+                                     views:ThemesBehavior.StyleClass="TelerikTheme"
+                                     SelectedItems="{Binding SelectedItems}"
+                                     AutoGenerateColumns="False"
+                                     SelectionMode="Multiple"
+                                     SelectionStyle="{StaticResource DataGridSelectionStyle}"
+                                     Grid.Row="1">
+            <telerikDataGrid:RadDataGrid.Columns>
+                <telerikDataGrid:DataGridTextColumn PropertyName="Id" 
+                                                    CellContentStyle="{AppThemeBinding 
+                                                    Light={StaticResource CrudDataGridTextCellStyleLight}, 
+                                                    Dark={StaticResource CrudDataGridTextCellStyleDark}}"
+                                                    IsVisible="False"/>
+
+                <telerikDataGrid:DataGridTextColumn PropertyName="UserName" 
+                                                    CellContentStyle="{AppThemeBinding 
+                                                    Light={StaticResource CrudDataGridTextCellStyleLight}, 
+                                                    Dark={StaticResource CrudDataGridTextCellStyleDark}}"
+                                                    IsVisible="True"/>
+
+                <telerikDataGrid:DataGridTextColumn PropertyName="Email" 
+                                                    CellContentStyle="{AppThemeBinding 
+                                                    Light={StaticResource CrudDataGridTextCellStyleLight}, 
+                                                    Dark={StaticResource CrudDataGridTextCellStyleDark}}"
+                                                    IsVisible="True"/>
+
+                <telerikDataGrid:DataGridTextColumn PropertyName="Text" 
+                                                    CellContentStyle="{AppThemeBinding 
+                                                    Light={StaticResource CrudDataGridTextCellStyleLight}, 
+                                                    Dark={StaticResource CrudDataGridTextCellStyleDark}}"
+                                                    IsVisible="True"/>
+
+                <telerikDataGrid:DataGridTextColumn PropertyName="Status" 
+                                                    CellContentStyle="{AppThemeBinding 
+                                                    Light={StaticResource CrudDataGridTextCellStyleLight}, 
+                                                    Dark={StaticResource CrudDataGridTextCellStyleDark}}"
+                                                    IsVisible="True"/>
+            </telerikDataGrid:RadDataGrid.Columns>
+        </telerikDataGrid:RadDataGrid>
+
+        <Grid x:Name="PagerGrid"
+                  Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button HorizontalOptions="CenterAndExpand"
+                        Margin="5"
+                        Grid.Row="1"
+                        Text="First"
+                        Command="{Binding FirstButtonCommand}" />
+            <Button Grid.Column="1"
+                        Grid.Row="1"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="{Binding PreviousPageNumber}"
+                        IsEnabled="{Binding PreviousButtonEnabled}"
+                        Margin="5"
+                        Command="{Binding PreviousButtonCommand}" />
+            <Button Grid.Column="2"
+                        Grid.Row="1"
+                        Text="{Binding NextPageNumber}"
+                        IsEnabled="{Binding NextButtonEnabled}"
+                        HorizontalOptions="CenterAndExpand"
+                        Margin="5"
+                        Command="{Binding NextButtonCommand}" />
+            <Button Grid.Column="3"
+                        Grid.Row="1"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Last"
+                        Margin="5"
+                        Command="{Binding LastButtonCommand}" />
+        </Grid>
+    </Grid>
+</ContentView>

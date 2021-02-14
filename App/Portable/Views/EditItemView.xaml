@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviour="clr-namespace:App.Portable.Helpers.Behaviors"
+             xmlns:converter="clr-namespace:App.Portable.Helpers.Converters;assembly=App.Portable"
+             x:Class="App.Portable.Views.EditItemView"
+             Title="Edit Item">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Spacing="3" Padding="15">
+
+            <!--Id-->
+            <Entry x:Name="IdTextBlock" Text="{Binding TaskId}" FontSize="Medium" IsVisible="False" />
+            <!--/Id-->
+
+            <!--UserName-->
+            <Entry x:Name="UserNameTextBlock" 
+                   FontSize="Medium" 
+                   Text="{Binding UserName.Value}" 
+                   Placeholder="User Name" IsVisible="False">
+                <Entry.Behaviors>
+                    <behaviour:EntryLineValidationBehaviour IsValid="{Binding UserName.IsValid}"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Label Text="{Binding UserName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                   IsVisible="{Binding UserName.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                   Style="{StaticResource ErrorTextStyle}"/>
+            <!--/UserName-->
+
+            <!--Text-->
+            <Entry x:Name="TextInputTextBlock" 
+                   FontSize="Medium" 
+                   Text="{Binding Text.Value}" 
+                   Placeholder="Text">
+                <Entry.Behaviors>
+                    <behaviour:EntryLineValidationBehaviour IsValid="{Binding Text.IsValid}"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Label Text="{Binding Text.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                   IsVisible="{Binding Text.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                   Style="{StaticResource ErrorTextStyle}"/>
+            <!--/Text-->
+
+            <!--Email-->
+            <Entry x:Name="EmailInputTextBox"
+                   FontSize="Medium" Margin="0" 
+                   Text="{Binding Email.Item1.Value}" 
+                   Placeholder="Email" 
+                   IsVisible="False">
+                <Entry.Behaviors>
+                    <behaviour:EntryLineValidationBehaviour IsValid="{Binding Email.Item1.IsValid}"/>
+                </Entry.Behaviors>
+            </Entry>
+
+            <Label Text="{Binding Email.Item1.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                   IsVisible="{Binding Email.Item1.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                   Style="{StaticResource ErrorTextStyle}"/>
+            <!--/Email-->
+
+            <!--Status-->
+            <Entry x:Name="StatusInputTextBlock" 
+                   FontSize="Medium" 
+                   Text="{Binding Status.Item1.Value}" 
+                   Placeholder="Status">
+                <Entry.Behaviors>
+                    <behaviour:EntryLineValidationBehaviour IsValid="{Binding Status.Item1.IsValid}"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Label Text="{Binding Status.Item1.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                   IsVisible="{Binding Status.Item1.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                   Style="{StaticResource ErrorTextStyle}"/>
+            <!--/Status-->
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancel" Clicked="Cancel_Completed" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Save" Clicked="EditInputTextBox_Completed" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

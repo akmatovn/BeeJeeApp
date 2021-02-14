@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:App.Portable.Views"
+             x:Class="App.Portable.Views.MenuView"
+             Title="Menu"
+             BackgroundColor="{StaticResource MenuBackground}">
+    <ContentPage.Content  >
+        <StackLayout VerticalOptions="FillAndExpand"  >
+            <StackLayout Margin="0, 40, 0, 20"  >
+                <Grid  >
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </StackLayout>
+            <ListView x:Name="MenuListView" RowHeight="45" SeparatorVisibility="None" >
+                <ListView.ItemTemplate  >
+                    <DataTemplate >
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="7*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding Icon}" Grid.Column="0" Margin="5,10,0,10" />
+                                <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="18" TextColor="{StaticResource Primary}"
+                                                 VerticalTextAlignment="Center" 
+                                                 Grid.Column="1" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
